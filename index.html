@@ -1,1 +1,338 @@
-<!DOCTYPE html> <html lang="pt-BR"> <head> <meta charset="UTF-8"> <meta name="viewport" content="width=device-width, initial-scale=1.0"> <title>Meus Ingressos - Ticketmaster</title> <style> * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Arial', sans-serif; } body { background-color: #f5f5f5; color: #333; } header { background-color: #026cdf; color: white; padding: 15px 20px; font-size: 20px; font-weight: bold; box-shadow: 02px 4px rgba(0,0,0,0.1); } .container { max-width: 600px; margin: 20px auto; padding: 015px; } h1 { font-size: 24px; margin-bottom: 20px; color: #111; } .tabs { display: flex; border-bottom: 2px solid #ddd; margin-bottom: 20px; } .tab { padding: 10px 20px; cursor: pointer; font-weight: bold; color: #666; } .tab.active { color: #026cdf; border-bottom: 3px solid #026cdf; margin-bottom: -2px; } .month-section { margin-top: 25px; font-size: 14px; font-weight: bold; color: #666; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 10px; } .ticket-card { background: white; border-radius: 8px; padding: 20px; margin-bottom: 15px; box-shadow: 02px 8px rgba(0,0,0,0.05); border-left: 5px solid #026cdf; } .ticket-details { font-size: 14px; color: #555; margin-bottom: 5px; } .ticket-title { font-size: 18px; font-weight: bold; color: #111; margin-bottom: 8px; } .ticket-venue { font-size: 14px; color: #777; } </style> </head> <body> <header> Ticketmaster </header> <div class="container"> <h1>Meus ingressos</h1> <div class="tabs"> <div class="tab active">Próximos</div> <div class="tab">Anterior</div> </div> <!-- Outubro 2026 --> <div class="month-section">Outubro 2026</div> <div class="ticket-card"> <div class="ticket-details">3 ingressos Sexta-Feira 3020:00hs</div> <div class="ticket-title">BTS WORLD TOUR ARIRANG</div> <div class="ticket-venue">MorumBis</div> </div> <!-- Abril 2026 --> <div class="month-section">Abril 2026</div> <div class="ticket-card"> <div class="ticket-details">2 ingressos Sexta-Feira 0121:00hs</div> <div class="ticket-title">The Weeknd: After Hours Til Dawn</div> <div class="ticket-venue">MorumBis</div> </div> <!-- Março 2026 --> <div class="month-section">Março 2026</div> <div class="ticket-card"> <div class="ticket-details">2 ingressos Quarta-Feira 0421:00hs</div> <div class="ticket-title">AC/DC: Pwr Up Tour</div> <div class="ticket-venue">MorumBis</div> </div> </div> </body> </html>
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meus Ingressos</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+        }
+        body {
+            background-color: #0f1115;
+            color: #ffffff;
+            padding: 16px;
+        }
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 24px;
+            padding-top: 8px;
+        }
+        .header h1 {
+            font-size: 24px;
+            font-weight: 700;
+        }
+        .header-icons {
+            display: flex;
+            gap: 16px;
+        }
+        .icon-btn {
+            background: #1e222b;
+            border: none;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            cursor: pointer;
+        }
+        .tabs {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 24px;
+        }
+        .tab {
+            flex: 1;
+            padding: 12px;
+            text-align: center;
+            border-radius: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            border: none;
+        }
+        .tab.active {
+            background-color: #ffffff;
+            color: #000000;
+        }
+        .tab.inactive {
+            background-color: #1e222b;
+            color: #8b949e;
+        }
+        .section-title {
+            font-size: 14px;
+            color: #8b949e;
+            margin-bottom: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        .ticket-card {
+            background-color: #161b22;
+            border-radius: 16px;
+            padding: 16px;
+            display: flex;
+            gap: 16px;
+            cursor: pointer;
+            border: 1px solid #30363d;
+            transition: transform 0.2s;
+        }
+        .ticket-card:active {
+            transform: scale(0.98);
+        }
+        .ticket-thumb {
+            width: 80px;
+            height: 80px;
+            border-radius: 8px;
+            object-fit: cover;
+            background-color: #21262d;
+        }
+        .ticket-info h3 {
+            font-size: 12px;
+            color: #3fb950;
+            margin-bottom: 4px;
+            font-weight: 600;
+        }
+        .ticket-info h2 {
+            font-size: 16px;
+            font-weight: 700;
+            margin-bottom: 6px;
+            color: #ffffff;
+        }
+        .ticket-info p {
+            font-size: 14px;
+            color: #8b949e;
+        }
+
+        /* Vista de Detalhe do Ingresso */
+        #detail-view {
+            display: none;
+            background-color: #0f1115;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow-y: auto;
+            z-index: 100;
+        }
+        .detail-header {
+            background-color: #161b22;
+            padding: 16px;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            border-bottom: 1px solid #30363d;
+        }
+        .back-btn {
+            background: none;
+            border: none;
+            color: #fff;
+            font-size: 20px;
+            cursor: pointer;
+        }
+        .detail-header-info h2 {
+            font-size: 16px;
+            font-weight: 600;
+        }
+        .detail-header-info p {
+            font-size: 12px;
+            color: #8b949e;
+        }
+        .ticket-box {
+            background: #ffffff;
+            color: #000;
+            margin: 16px;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+        }
+        .ticket-brand {
+            background-color: #0055ff;
+            color: white;
+            text-align: center;
+            padding: 32px 16px;
+        }
+        .ticket-brand h1 {
+            font-size: 32px;
+            font-style: italic;
+            font-weight: 900;
+            letter-spacing: -1px;
+            margin-bottom: 4px;
+        }
+        .ticket-brand p {
+            font-size: 14px;
+            font-weight: 500;
+        }
+        .anim-bar {
+            height: 6px;
+            background: linear-gradient(90deg, #00ffcc, #0055ff, #00ffcc);
+            background-size: 200% 100%;
+            animation: movingBar 2s linear infinite;
+        }
+        @keyframes movingBar {
+            0% { background-position: 0% 0%; }
+            100% { background-position: 200% 0%; }
+        }
+        .ticket-content {
+            padding: 24px 16px;
+            text-align: center;
+        }
+        .qr-code-img {
+            width: 200px;
+            height: 200px;
+            margin: 0 auto 16px auto;
+            display: block;
+        }
+        .seat-info {
+            display: flex;
+            justify-content: space-around;
+            margin-bottom: 24px;
+            text-align: left;
+            background: #f8f9fa;
+            padding: 12px;
+            border-radius: 8px;
+        }
+        .seat-info div p:first-child {
+            font-size: 11px;
+            color: #6c757d;
+            text-transform: uppercase;
+            font-weight: 600;
+        }
+        .seat-info div p:last-child {
+            font-size: 15px;
+            font-weight: 700;
+            color: #212529;
+        }
+        .ticket-details-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+            padding: 0 16px 24px 16px;
+            text-align: left;
+        }
+        .ticket-details-grid div p:first-child {
+            font-size: 11px;
+            color: #6c757d;
+            text-transform: uppercase;
+            font-weight: 600;
+        }
+        .ticket-details-grid div p:last-child {
+            font-size: 15px;
+            font-weight: 700;
+            color: #212529;
+        }
+        .transfer-footer {
+            padding: 16px;
+            text-align: center;
+            border-top: 1px solid #dee2e6;
+            color: #00b4d8;
+            font-size: 14px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Ecrã Principal (Lista) -->
+    <div id="list-view">
+        <div class="header">
+            <h1>Meus ingressos</h1>
+            <div class="header-icons">
+                <button class="icon-btn">🔔</button>
+                <button class="icon-btn">👤</button>
+            </div>
+        </div>
+
+        <div class="tabs">
+            <button class="tab active">Próximos</button>
+            <button class="tab inactive">Anterior</button>
+        </div>
+
+        <div class="section-title">Outubro 2026</div>
+
+        <div class="ticket-card" onclick="openTicket()">
+            <img src="https://images.unsplash.com/photo-1514525253161-7a46d19cd819?w=150" alt="BTS" class="ticket-thumb">
+            <div class="ticket-info">
+                <h3>3 ingressos Sexta-Feira 30 20:00hs</h3>
+                <h2>BTS WORLD TOUR ARIRANG</h2>
+                <p>MorumBis</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Ecrã de Detalhe do Ingresso -->
+    <div id="detail-view">
+        <div class="detail-header">
+            <button class="back-btn" onclick="closeTicket()">❮</button>
+            <div class="detail-header-info">
+                <h2>BTS WORLD TOUR ARIRANG</h2>
+                <p>30/10/2026 - MorumBis</p>
+            </div>
+        </div>
+
+        <div class="ticket-box">
+            <div class="ticket-brand">
+                <h1>ticketmaster</h1>
+                <p>#OAoVivoÉAgora</p>
+            </div>
+            <div class="anim-bar"></div>
+            <div class="ticket-content">
+                <!-- Simulação de QR Code limpo em SVG -->
+                <svg class="qr-code-img" viewBox="0 0 25 25" fill="black">
+                    <path d="M0 0h7v7H0zM2 2v3h3V2zM9 0h2v2H9zM13 0h3v3h-3zM18 0h7v7H18Z M20 2v3h3V2zM0 9h3v2H0zM6 9h4v2H6zM12 9h3v3h-3zM17 9h2v2h-2zM22 9h3v2h-3zM0 13h2v2H0zM5 13h3v3H5zM10 13h4v2h-4zM16 13h3v3h-3zM21 13h4v2h-4zM0 18h7v7H0zM2 20v3h3V20zM9 18h3v2H9zM14 18h2v3h-2zM18 18h2v2h-2zM22 18h3v3h-3z"/>
+                </svg>
+                <div class="seat-info">
+                    <div>
+                        <p>Setor</p>
+                        <p>Cadeira Inferior</p>
+                    </div>
+                    <div>
+                        <p>Acesso</p>
+                        <p>Portão 17C</p>
+                    </div>
+                </div>
+            </div>
+            <div class="ticket-details-grid">
+                <div>
+                    <p>Taxa</p>
+                    <p>Inteira - R$ 1,080</p>
+                </div>
+                <div>
+                    <p>Fileira</p>
+                    <p>Não numerado</p>
+                </div>
+                <div>
+                    <p>Abertura</p>
+                    <p>16:00</p>
+                </div>
+                <div>
+                    <p>Início</p>
+                    <p>20:00</p>
+                </div>
+            </div>
+            <div class="transfer-footer">
+                <span>↩</span> Devolva o ingresso a Kaue Ribeiro
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function openTicket() {
+            document.getElementById('detail-view').style.display = 'block';
+        }
+        function closeTicket() {
+            document.getElementById('detail-view').style.display = 'none';
+        }
+    </script>
+</body>
+</html>
