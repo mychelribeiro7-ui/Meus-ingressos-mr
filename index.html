@@ -84,10 +84,11 @@
             margin-bottom: 12px;
         }
         .ticket-thumb {
-            width: 80px;
-            height: 80px;
-            border-radius: 8px;
+            width: 90px;
+            height: 90px;
+            border-radius: 10px;
             object-fit: cover;
+            border: 1px solid #30363d;
         }
         .ticket-info h3 {
             font-size: 12px;
@@ -282,6 +283,7 @@
 
         <div class="section-title">Outubro 2026</div>
 
+        <!-- Aqui a miniatura está fixada na img1.jpg -->
         <div class="ticket-card" onclick="openTicket()">
             <img src="img1.jpg" alt="BTS" class="ticket-thumb">
             <div class="ticket-info">
@@ -303,7 +305,7 @@
         </div>
 
         <div class="ticket-carousel">
-            <!-- INGRESSO 1 -->
+            <!-- INGRESSO 1 (Usa img1.jpg) -->
             <div class="ticket-box">
                 <div class="ticket-brand">
                     <h1>ticketmaster</h1>
@@ -346,7 +348,7 @@
                 </div>
             </div>
 
-            <!-- INGRESSO 2 -->
+            <!-- INGRESSO 2 (Usa img2.jpg) -->
             <div class="ticket-box">
                 <div class="ticket-brand">
                     <h1>ticketmaster</h1>
@@ -389,7 +391,7 @@
                 </div>
             </div>
 
-            <!-- INGRESSO 3 -->
+            <!-- INGRESSO 3 (Usa img3.jpg) -->
             <div class="ticket-box">
                 <div class="ticket-brand">
                     <h1>ticketmaster</h1>
@@ -400,48 +402,4 @@
                     <img src="img3.jpg" alt="QR Code 3" class="qr-code-img">
                     <div class="seat-info">
                         <div>
-                            <p>Setor</p>
-                            <p>Cadeira Inferior</p>
-                        </div>
-                        <div>
-                            <p>Acesso</p>
-                            <p>Portão 17C</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="ticket-details-grid">
-                    <div>
-                        <p>Taxa</p>
-                        <p>Inteira - R$ 1,080</p>
-                    </div>
-                    <div>
-                        <p>Fileira</p>
-                        <p>Não numerado</p>
-                    </div>
-                    <div>
-                        <p>Abertura</p>
-                        <p>16:00</p>
-                    </div>
-                    <div>
-                        <p>Início</p>
-                        <p>20:00</p>
-                    </div>
-                </div>
-                <div class="transfer-footer">
-                    <span>↩</span> Devolva o ingresso a Kaue Ribeiro
-                </div>
-            </div>
-        </div>
-        <div class="ticket-counter">Deslize para ver os outros ingressos ➔</div>
-    </div>
-
-    <script>
-        function openTicket() {
-            document.getElementById('detail-view').style.display = 'block';
-        }
-        function closeTicket() {
-            document.getElementById('detail-view').style.display = 'none';
-        }
-    </script>
-</body>
-</html>
+                            <p>Setor
