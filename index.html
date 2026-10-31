@@ -29,7 +29,7 @@
         }
         .header-icons {
             display: flex;
-            gap: 16px;
+            gap: 12px;
         }
         .icon-btn {
             background: #1e222b;
@@ -80,17 +80,13 @@
             gap: 16px;
             cursor: pointer;
             border: 1px solid #30363d;
-            transition: transform 0.2s;
-        }
-        .ticket-card:active {
-            transform: scale(0.98);
+            align-items: center;
         }
         .ticket-thumb {
             width: 80px;
             height: 80px;
             border-radius: 8px;
             object-fit: cover;
-            background-color: #ffffff;
         }
         .ticket-info h3 {
             font-size: 12px;
@@ -263,7 +259,8 @@
         <div class="ticket-card" onclick="openTicket()">
             <img src="https://images.unsplash.com/photo-1540039155733-5bb30b53aa14?w=150" alt="BTS" class="ticket-thumb">
             <div class="ticket-info">
-                <h3>3 ingressos Sexta-Feira 30 20:00hs</h3>
+                <!-- AQUI ALTERAS A DATA NA LISTA PRINCIPAL -->
+                <h3>3 ingressos Sábado 31 20:00hs</h3>
                 <h2>BTS WORLD TOUR ARIRANG</h2>
                 <p>MorumBis</p>
             </div>
@@ -276,7 +273,8 @@
             <button class="back-btn" onclick="closeTicket()">❮</button>
             <div class="detail-header-info">
                 <h2>BTS WORLD TOUR ARIRANG</h2>
-                <p>30/10/2026 - MorumBis</p>
+                <!-- AQUI ALTERAS A DATA NO TOPO DO DETALHE -->
+                <p>31/10/2026 - MorumBis</p>
             </div>
         </div>
 
@@ -297,6 +295,7 @@
                     </div>
                     <div>
                         <p>Acesso</p>
+                        <!-- AQUI ALTERAS O PORTÃO DO INGRESSO -->
                         <p>Portão 17C</p>
                     </div>
                 </div>
