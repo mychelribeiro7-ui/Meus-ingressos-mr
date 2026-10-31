@@ -83,7 +83,6 @@
             align-items: center;
             margin-bottom: 12px;
         }
-        /* Miniatura corrigida com fundo branco/destaque para a imagem respirar */
         .ticket-thumb-container {
             width: 85px;
             height: 85px;
@@ -91,16 +90,12 @@
             overflow: hidden;
             background: #ffffff;
             flex-shrink: 0;
-            display: flex;
-            align-items: center;
-            justify-content: center;
             border: 1px solid #30363d;
         }
         .ticket-thumb {
             width: 100%;
             height: 100%;
-            object-fit: contain;
-            background-color: #fff;
+            object-fit: cover;
         }
         .ticket-info h3 {
             font-size: 12px;
@@ -119,10 +114,10 @@
             color: #8b949e;
         }
 
-        /* Vista de Detalhe com Carrossel Horizontal */
+        /* Vista de Detalhe com Carrossel Horizontal em Tela Cheia */
         #detail-view {
             display: none;
-            background-color: #0f1115;
+            background-color: #000000;
             position: fixed;
             top: 0;
             left: 0;
@@ -132,7 +127,7 @@
             z-index: 100;
         }
         .detail-header {
-            background-color: #161b22;
+            background-color: #0f1115;
             padding: 16px;
             display: flex;
             align-items: center;
@@ -143,135 +138,58 @@
             background: none;
             border: none;
             color: #fff;
-            font-size: 20px;
+            font-size: 22px;
             cursor: pointer;
         }
         .detail-header-info h2 {
-            font-size: 16px;
+            font-size: 15px;
             font-weight: 600;
+            color: #fff;
         }
         .detail-header-info p {
             font-size: 12px;
             color: #8b949e;
         }
 
-        /* Contentor de Deslizar (Carrossel) */
+        /* Contentor do Carrossel Exibindo os Prints Inteiros */
         .ticket-carousel {
             display: flex;
             overflow-x: auto;
             scroll-snap-type: x mandatory;
-            gap: 16px;
-            padding: 16px;
             scroll-behavior: smooth;
             -webkit-overflow-scrolling: touch;
+            height: calc(100vh - 70px);
         }
         .ticket-carousel::-webkit-scrollbar {
             display: none;
         }
 
-        .ticket-box {
-            background: #ffffff;
-            color: #000;
+        .ticket-slide {
             min-width: 100%;
+            height: 100%;
             scroll-snap-align: center;
-            border-radius: 16px;
-            overflow: hidden;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.5);
-        }
-        .ticket-brand {
-            background-color: #0055ff;
-            color: white;
-            text-align: center;
-            padding: 32px 16px;
-        }
-        .ticket-brand h1 {
-            font-size: 32px;
-            font-style: italic;
-            font-weight: 900;
-            letter-spacing: -1px;
-            margin-bottom: 4px;
-        }
-        .ticket-brand p {
-            font-size: 14px;
-            font-weight: 500;
-        }
-        .anim-bar {
-            height: 6px;
-            background: linear-gradient(90deg, #00ffcc, #0055ff, #00ffcc);
-            background-size: 200% 100%;
-            animation: movingBar 2s linear infinite;
-        }
-        @keyframes movingBar {
-            0% { background-position: 0% 0%; }
-            100% { background-position: 200% 0%; }
-        }
-        .ticket-content {
-            padding: 24px 16px;
-            text-align: center;
-        }
-        .qr-code-img {
-            width: 100%;
-            max-width: 260px;
-            height: auto;
-            margin: 0 auto 16px auto;
-            display: block;
-            border-radius: 8px;
-        }
-        .seat-info {
             display: flex;
-            justify-content: space-around;
-            margin-bottom: 24px;
-            text-align: left;
-            background: #f8f9fa;
-            padding: 12px;
-            border-radius: 8px;
-        }
-        .seat-info div p:first-child {
-            font-size: 11px;
-            color: #6c757d;
-            text-transform: uppercase;
-            font-weight: 600;
-        }
-        .seat-info div p:last-child {
-            font-size: 15px;
-            font-weight: 700;
-            color: #212529;
-        }
-        .ticket-details-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 16px;
-            padding: 0 16px 24px 16px;
-            text-align: left;
-        }
-        .ticket-details-grid div p:first-child {
-            font-size: 11px;
-            color: #6c757d;
-            text-transform: uppercase;
-            font-weight: 600;
-        }
-        .ticket-details-grid div p:last-child {
-            font-size: 15px;
-            font-weight: 700;
-            color: #212529;
-        }
-        .transfer-footer {
-            padding: 16px;
-            text-align: center;
-            border-top: 1px solid #dee2e6;
-            color: #00b4d8;
-            font-size: 14px;
-            font-weight: 600;
-            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
             align-items: center;
-            justify-content: center;
-            gap: 8px;
+            background: #000;
+            overflow-y: auto;
+            padding-bottom: 30px;
         }
+        
+        .full-ticket-img {
+            width: 100%;
+            max-width: 500px;
+            height: auto;
+            display: block;
+        }
+
         .ticket-counter {
             text-align: center;
             color: #8b949e;
             font-size: 13px;
-            margin-top: 8px;
+            padding: 12px;
+            background: #0f1115;
             font-weight: 600;
         }
     </style>
@@ -307,7 +225,7 @@
         </div>
     </div>
 
-    <!-- Ecrã de Detalhe com os 3 Ingressos Deslizantes -->
+    <!-- Ecrã de Detalhe com o Carrossel dos Prints Reais -->
     <div id="detail-view">
         <div class="detail-header">
             <button class="back-btn" onclick="closeTicket()">❮</button>
@@ -318,144 +236,32 @@
         </div>
 
         <div class="ticket-carousel">
-            <!-- INGRESSO 1 -->
-            <div class="ticket-box">
-                <div class="ticket-brand">
-                    <h1>ticketmaster</h1>
-                    <p>#OAoVivoÉAgora</p>
-                </div>
-                <div class="anim-bar"></div>
-                <div class="ticket-content">
-                    <img src="img1.jpg" alt="QR Code 1" class="qr-code-img">
-                    <div class="seat-info">
-                        <div>
-                            <p>Setor</p>
-                            <p>Cadeira Inferior</p>
-                        </div>
-                        <div>
-                            <p>Acesso</p>
-                            <p>Portão 17C</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="ticket-details-grid">
-                    <div>
-                        <p>Taxa</p>
-                        <p>Inteira - R$ 1,080</p>
-                    </div>
-                    <div>
-                        <p>Fileira</p>
-                        <p>Não numerado</p>
-                    </div>
-                    <div>
-                        <p>Abertura</p>
-                        <p>16:00</p>
-                    </div>
-                    <div>
-                        <p>Início</p>
-                        <p>20:00</p>
-                    </div>
-                </div>
-                <div class="transfer-footer">
-                    <span>↩</span> Devolva o ingresso a Kaue Ribeiro
-                </div>
+            <!-- SLIDE 1 (Print 1) -->
+            <div class="ticket-slide">
+                <img src="img1.jpg" alt="Ingresso 1" class="full-ticket-img">
             </div>
 
-            <!-- INGRESSO 2 -->
-            <div class="ticket-box">
-                <div class="ticket-brand">
-                    <h1>ticketmaster</h1>
-                    <p>#OAoVivoÉAgora</p>
-                </div>
-                <div class="anim-bar"></div>
-                <div class="ticket-content">
-                    <img src="img2.jpg" alt="QR Code 2" class="qr-code-img">
-                    <div class="seat-info">
-                        <div>
-                            <p>Setor</p>
-                            <p>Cadeira Inferior</p>
-                        </div>
-                        <div>
-                            <p>Acesso</p>
-                            <p>Portão 17C</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="ticket-details-grid">
-                    <div>
-                        <p>Taxa</p>
-                        <p>Inteira - R$ 1,080</p>
-                    </div>
-                    <div>
-                        <p>Fileira</p>
-                        <p>Não numerado</p>
-                    </div>
-                    <div>
-                        <p>Abertura</p>
-                        <p>16:00</p>
-                    </div>
-                    <div>
-                        <p>Início</p>
-                        <p>20:00</p>
-                    </div>
-                </div>
-                <div class="transfer-footer">
-                    <span>↩</span> Devolva o ingresso a Kaue Ribeiro
-                </div>
+            <!-- SLIDE 2 (Print 2) -->
+            <div class="ticket-slide">
+                <img src="img2.jpg" alt="Ingresso 2" class="full-ticket-img">
             </div>
 
-            <!-- INGRESSO 3 -->
-            <div class="ticket-box">
-                <div class="ticket-brand">
-                    <h1>ticketmaster</h1>
-                    <p>#OAoVivoÉAgora</p>
-                </div>
-                <div class="anim-bar"></div>
-                <div class="ticket-content">
-                    <img src="img3.jpg" alt="QR Code 3" class="qr-code-img">
-                    <div class="seat-info">
-                        <div>
-                            <p>Setor</p>
-                            <p>Cadeira Inferior</p>
-                        </div>
-                        <div>
-                            <p>Acesso</p>
-                            <p>Portão 17C</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="ticket-details-grid">
-                    <div>
-                        <p>Taxa</p>
-                        <p>Inteira - R$ 1,080</p>
-                    </div>
-                    <div>
-                        <p>Fileira</p>
-                        <p>Não numerado</p>
-                    </div>
-                    <div>
-                        <p>Abertura</p>
-                        <p>16:00</p>
-                    </div>
-                    <div>
-                        <p>Início</p>
-                        <p>20:00</p>
-                    </div>
-                </div>
-                <div class="transfer-footer">
-                    <span>↩</span> Devolva o ingresso a Kaue Ribeiro
-                </div>
+            <!-- SLIDE 3 (Print 3) -->
+            <div class="ticket-slide">
+                <img src="img3.jpg" alt="Ingresso 3" class="full-ticket-img">
             </div>
         </div>
-        <div class="ticket-counter">Deslize para ver os outros ingressos ➔</div>
+        <div class="ticket-counter">← Deslize para ver os outros ingressos →</div>
     </div>
 
     <script>
         function openTicket() {
+            document.getElementById('list-view').style.display = 'none';
             document.getElementById('detail-view').style.display = 'block';
         }
         function closeTicket() {
             document.getElementById('detail-view').style.display = 'none';
+            document.getElementById('list-view').style.display = 'block';
         }
     </script>
 </body>
